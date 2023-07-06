@@ -1,0 +1,12 @@
+numpy
+scipy
+pandas
+prettytable
+colorama
+XlsxWriter
+gemmi
+opencv-python
+scikit-learn
+dtaidistance
+
+

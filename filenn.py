@@ -13,6 +13,20 @@ import os.path
 import gemmi
 from cifreaderq import cifreader
 from sklearn.decomposition import FastICA,PCA
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.svm import SVC
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import ExtraTreesClassifier
+from sklearn.ensemble import BaggingClassifier
+import dtaidistance
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import VotingClassifier
+from sklearn.linear_model import Lasso,Ridge
+
+ 
+
 
 
 
@@ -52,6 +66,49 @@ def main():
                 cinten.append(np.asarray(intenC,dtype=float))
                 tinten.append(np.asarray(intenT,dtype=float))
                 ginten.append(np.asarray(intenG,dtype=float))
+
+
+    number=np.arange(1,len(ginten)+1)
+    #print(number)
+              
+    x=PrettyTable()
+    x.add_column('number',number)
+    x.add_column('A',ainten)
+    x.add_column('G',ginten)
+    x.add_column('C',cinten)
+    x.add_column('T',tinten)
+    x.align = "c"
+    print(x)
+
+    
+
+    
+    x=np.column_stack((ainten,ginten,cinten,tinten))
+    print(x.shape)
+    df = pd.DataFrame(x,
+                  columns=['intensitivityA','intensitivityG','intensitivityC','intensitivityT'])
+    boxplot = df.boxplot(column=['intensitivityA','intensitivityG','intensitivityC','intensitivityT'])
+    plt.figure('Violinplot',figsize=(15,7))   
+    sns.violinplot(data=df)
+    plt.grid(True)
+    plt.tick_params(labelsize =20,#  Размер подписи
+                    color = 'k')   #  Цвет 
+    
+
+    plt.figure('Boxplot',figsize=(15,7))    
+    sns.boxplot(df)
+    plt.grid(True)
+    plt.tick_params(labelsize =20,#  Размер подписи
+                    color = 'k')   #  Цвет делений
+    
+
+    #plt.figure('Histplot',figsize=(15,7))  
+    #sns.histplot(df)
+    #plt.grid(True)
+    #plt.tick_params(labelsize =20,#  Размер подписи
+                    #color = 'k')   #  Цвет делений
+        
+    plt.show()
 
 
 

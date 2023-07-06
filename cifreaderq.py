@@ -32,20 +32,7 @@ def cifreader(f):
         intensitivityG=np.resize(intensitivityG,intensitivityG.size)
         intensitivityT=np.resize(intensitivityT,intensitivityT.size)
         #print(intensitivityA.shape)
-        d={'intensitivityA':intensitivityA,'intensitivityG':intensitivityG,'intensitivityC':intensitivityC,'intensitivityT':intensitivityT}
-        df = pd.DataFrame(data=d)
-        plt.figure('Boxplot',figsize=(15,7))    
-        sns.boxplot(df)
-        plt.grid(True)
-        plt.tick_params(labelsize =20,#  Размер подписи
-                    color = 'k')   #  Цвет делений
         
-
-        plt.figure('Violinplot',figsize=(15,7))    
-        sns.violinplot(df)
-        plt.grid(True)
-        plt.tick_params(labelsize =20,#  Размер подписи
-                    color = 'k')   #  Цвет делений
         
         #plt.figure('Histplot',figsize=(15,7))  
         #sns.histplot(df)
@@ -61,7 +48,7 @@ def cifreader(f):
         #print(intensitivityG.sum())
         #print(intensitivityT.sum())
         print()
-        plt.show()
+        
         return np.sum(intensitivityA),np.sum(intensitivityC),np.sum(intensitivityG),np.sum(intensitivityT),cluster_count
         
        
