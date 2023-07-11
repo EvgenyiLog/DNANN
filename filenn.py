@@ -24,6 +24,10 @@ import dtaidistance
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import VotingClassifier
 from sklearn.linear_model import Lasso,Ridge
+from sklearn import preprocessing
+from sklearn.naive_bayes import GaussianNB
+
+
 
  
 
@@ -87,6 +91,20 @@ def main():
     print(x.shape)
     df = pd.DataFrame(x,
                   columns=['intensitivityA','intensitivityG','intensitivityC','intensitivityT'])
+    print(df.keys())
+    le = preprocessing.LabelEncoder()
+    le.fit(df.keys())
+
+    
+    print(list(le.classes_))
+    y=le.transform(le.classes_)
+
+    print(y)
+    clf1 = LogisticRegression(multi_class='multinomial', random_state=1)
+    clf2 = RandomForestClassifier(n_estimators=50, random_state=1)
+    clf3 = GaussianNB()
+    eclf = VotingClassifier(estimators=[('lr', clf1), ('rf', clf2), ('gnb', clf3)],voting='soft')
+    #eclf = eclf.fit(x, y)
     boxplot = df.boxplot(column=['intensitivityA','intensitivityG','intensitivityC','intensitivityT'])
     plt.figure('Violinplot',figsize=(15,7))   
     sns.violinplot(data=df)
