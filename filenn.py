@@ -26,6 +26,11 @@ from sklearn.ensemble import VotingClassifier
 from sklearn.linear_model import Lasso,Ridge
 from sklearn import preprocessing
 from sklearn.naive_bayes import GaussianNB
+from sklearn.cluster import KMeans
+from sklearn.datasets import make_classification
+from scipy.stats import f_oneway
+from dtaidistance import dtw, clustering
+
 
 
 
@@ -104,7 +109,25 @@ def main():
     clf2 = RandomForestClassifier(n_estimators=50, random_state=1)
     clf3 = GaussianNB()
     eclf = VotingClassifier(estimators=[('lr', clf1), ('rf', clf2), ('gnb', clf3)],voting='soft')
+    #print(df.values)
+    
     #eclf = eclf.fit(x, y)
+    kmeans = KMeans(n_clusters=4, random_state=None, n_init="auto").fit(df.values)
+    print(kmeans.labels_)
+    X, y = make_classification(n_features=4)
+    clf = ExtraTreesClassifier(n_estimators=200)
+    clf.fit(X, y)
+    clf.predict(df.values)
+    print(clf.classes_)
+    #new_center = dtaidistance.dtw_barycenter.dba(df.values, center, use_c=True)
+    #new_center = dtaidistance.dtw_barycenter.dba_loop(df.values, center, max_it=10, thr=0.0001, use_c=True)
+    model = clustering.KMedoids(dtw.distance_matrix_fast, {}, k=3)
+    cluster_idx = model.fit(df.values)
+    print(cluster_idx)
+    f_oneway(df.values)
+
+
+
     boxplot = df.boxplot(column=['intensitivityA','intensitivityG','intensitivityC','intensitivityT'])
     plt.figure('Violinplot',figsize=(15,7))   
     sns.violinplot(data=df)

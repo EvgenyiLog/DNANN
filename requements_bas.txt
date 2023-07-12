@@ -8,5 +8,6 @@ gemmi
 opencv-python
 scikit-learn
 dtaidistance
+pyclustering
 
 
