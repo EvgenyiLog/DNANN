@@ -124,7 +124,9 @@ def main():
     model = clustering.KMedoids(dtw.distance_matrix_fast, {}, k=3)
     cluster_idx = model.fit(df.values)
     print(cluster_idx)
-    f_oneway(df.values)
+    f,p=f_oneway(df['intensitivityA'].values,df['intensitivityG'].values)
+    print(f)
+    print(p)
 
 
 
