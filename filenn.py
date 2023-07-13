@@ -30,7 +30,8 @@ from sklearn.cluster import KMeans
 from sklearn.datasets import make_classification
 from scipy.stats import f_oneway
 from dtaidistance import dtw, clustering
-
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
 
 
 
@@ -124,7 +125,23 @@ def main():
     model = clustering.KMedoids(dtw.distance_matrix_fast, {}, k=3)
     cluster_idx = model.fit(df.values)
     print(cluster_idx)
+    clf=RandomForestClassifier(n_estimators=200)
+    clf.fit(X, y)
+    print(clf.classes_)
+    clf = BaggingClassifier(estimator=SVC(),n_estimators=10).fit(X, y)
+    print(clf.predict(x))
+    
+    clf = make_pipeline(StandardScaler(), SVC(gamma='auto'))
+    clf.fit(X, y)
+    print(clf.predict(x))
+    clf = LogisticRegression(random_state=0).fit(X, y)
+    print(clf.predict(x))
+   
+
     f,p=f_oneway(df['intensitivityA'].values,df['intensitivityG'].values)
+    print(f)
+    print(p)
+    f,p=f_oneway(df['intensitivityC'].values,df['intensitivityT'].values)
     print(f)
     print(p)
 
