@@ -136,6 +136,9 @@ def main():
     print(clf.predict(x))
     clf = LogisticRegression(random_state=0).fit(X, y)
     print(clf.predict(x))
+    clf=SVC()
+    clf.fit(X, y)
+    print(clf.predict(x))
     x=np.c_[ainten,ginten,cinten,tinten]
     pca = PCA(n_components=4)
     
