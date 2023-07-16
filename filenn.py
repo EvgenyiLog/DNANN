@@ -136,7 +136,13 @@ def main():
     print(clf.predict(x))
     clf = LogisticRegression(random_state=0).fit(X, y)
     print(clf.predict(x))
-   
+    x=np.c_[ainten,ginten,cinten,tinten]
+    pca = PCA(n_components=4)
+    
+    H = pca.fit_transform(x)
+    ica = FastICA(n_components=4)
+    S_ = ica.fit_transform(x)  # Get the estimated sources
+    A_ = ica.mixing_  # Get estimated mixing matrix
 
     f,p=f_oneway(df['intensitivityA'].values,df['intensitivityG'].values)
     print(f)
