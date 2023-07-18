@@ -9,5 +9,7 @@ opencv-python
 scikit-learn
 dtaidistance
 pyclustering
+seaborn
+matplotlib
 
 
