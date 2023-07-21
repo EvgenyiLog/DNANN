@@ -176,6 +176,11 @@ def main():
     #plt.grid(True)
     #plt.tick_params(labelsize =20,#  Размер подписи
                     #color = 'k')   #  Цвет делений
+    plt.figure('Barplot',figsize=(15,7))  
+    sns.barplot(df)
+    plt.grid(True)
+    plt.tick_params(labelsize =20,#  Размер подписи
+                    color = 'k')   #  Цвет делений
         
     plt.show()
 
