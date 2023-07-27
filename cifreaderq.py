@@ -13,7 +13,7 @@ def cifreader(f):
         #print(type(cluster_count))
         #print(cluster_count.shape)
         print()
-        intensitivity=np.fromfile(f,count=-1,offset=13,dtype=ctypes.c_uint16)#ctypes.c_uint
+        intensitivity=np.fromfile(f,count=-1,offset=13,dtype=ctypes.c_int16)#ctypes.c_uint
         #print(intensitivity)
         #print(type(intensitivity))
         
