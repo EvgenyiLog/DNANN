@@ -84,8 +84,8 @@ def main():
     x=PrettyTable()
     x.add_column('number',number)
     x.add_column('A',ainten)
-    x.add_column('G',ginten)
     x.add_column('C',cinten)
+    x.add_column('G',ginten)
     x.add_column('T',tinten)
     x.align = "c"
     print(x)
@@ -93,10 +93,10 @@ def main():
     
 
     
-    x=np.column_stack((ainten,ginten,cinten,tinten))
+    x=np.column_stack((ainten,cinten,ginten,tinten))
     print(x.shape)
     df = pd.DataFrame(x,
-                  columns=['intensitivityA','intensitivityG','intensitivityC','intensitivityT'])
+                  columns=['intensitivityA','intensitivityC','intensitivityG','intensitivityT'])
     print(df.keys())
     le = preprocessing.LabelEncoder()
     le.fit(df.keys())
